@@ -9,6 +9,11 @@ def usar_fuerza(mochila, sable_de_luz, objetos_sacados=0):
     if len(mochila) == 0:
         print("No hay objetos que sacar de la mochila.")
         return False
+    
+    if len(mochila) == objetos_sacados:
+        print("No hay un sable de luz en la mochila.")
+        return False
+    
     elif mochila[0] == sable_de_luz:
         print(f"Se encontró el sable de luz después de sacar {objetos_sacados} objetos.")
         return True

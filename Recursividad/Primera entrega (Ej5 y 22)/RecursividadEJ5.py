@@ -9,9 +9,9 @@ def convertir(romano: str) -> int:
         return romanos[romano[0]]
     else:
         if romanos[romano[0]] < romanos[romano[1]]:
-            return -romanos[romano[0]] + convertir(romano[1])
+            return -romanos[romano[0]] + convertir(romano[1:])
         else:
-            return romanos[romano[0]] + convertir(romano[1])
+            return romanos[romano[0]] + convertir(romano[1:])
         
 print(convertir('V'))
 print(convertir('IV'))

@@ -138,5 +138,3 @@ print("Listado de heroes ordenados por aparicion: ", (lista_solo_heroes(list_sup
 Antman_cambiarnombrerealScottLang(list_superheroes)
 eliminarymostrar_Electro_Baron(list_superheroes)
 print(biografia_TimeTraveller_Suit(list_superheroes))
-
-

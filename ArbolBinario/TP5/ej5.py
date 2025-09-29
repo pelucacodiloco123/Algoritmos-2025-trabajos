@@ -11,75 +11,93 @@ MCU_Tree.insert("Spider-Man", {"is_villain": False})
 MCU_Tree.insert("Loki", {"is_villain": True})
 
 
-
-def listar_villanos(node):
+def listar_villanos(arbol):
     villanos = []
-    if node is not None:
-        villanos.extend(listar_villanos(node.left))
-        if node.other_values["is_villain"]:
-            villanos.append(node.value)
-        villanos.extend(listar_villanos(node.right))
+    def inOrder(nodo):
+        if nodo is not None:
+            inOrder(nodo.left)
+            if nodo.other_values["is_villain"] is True:
+                villanos.append(nodo.value)
+            inOrder(nodo.right)
+
+    if arbol.root is not None:
+        inOrder(arbol.root)
+    
     return villanos
 
 
-def listar_superheroes_con_c(node):
+def listar_superheroes_C(arbol):
     heroes = []
-    if node is not None:
-        heroes.extend(listar_superheroes_con_c(node.left))
-        if not node.other_values["is_villain"] and node.value.startswith("C"):
-            heroes.append(node.value)
-        heroes.extend(listar_superheroes_con_c(node.right))
+    def inOrder(nodo):
+        if nodo is not None:
+            inOrder(nodo.left)
+            if nodo.other_values["is_villain"] is False and nodo.value.startswith("C"):
+                heroes.append(nodo.value)
+            inOrder(nodo.right)
+
+    if arbol.root is not None:
+        inOrder(arbol.root)
+
     return heroes
 
 
-def contar_superheroes(node):
-    if node is None:
-        return 0
-    cont = 0
-    if not node.other_values["is_villain"]:
-        cont = 1
-    cont += contar_superheroes(node.left)
-    cont += contar_superheroes(node.right)
-    return cont
+def contar_Superheroe(arbol):
+    def __contarNodosArbol(nodo):
+        cantidad = 0
+        if nodo is not None:
+            if nodo.other_values["is_villain"] is False: #si NO es villano se acumula
+                cantidad += 1
+            cantidad += __contarNodosArbol(nodo.left)
+            cantidad += __contarNodosArbol(nodo.right)
+
+        return cantidad
+
+    total = 0
+    if arbol.root is not None:
+        total = __contarNodosArbol(arbol.root)
+    
+    return total
 
 
-
-def Cambiar_Doctor_Strange(self, old_name, new_name):
-    searched = self.proximity_search("Doctor")
-    if searched:
-        for search in searched:
-            if search.value == old_name:
-                old = search.value
-                deleted_value, other_values = self.delete(old)
-                if deleted_value is not None:
-                    other_values["name"] = new_name
-                    self.insert(new_name, other_values)
-                    print(f"e) Se ha modificado {old} por {new_name}")
-                return
-        print(f"e) Se encontró 'Doctor', pero no {old_name}.")
-    else:
-        print("e) No se ha encontrado ningún elemento que empiece con 'Doctor'.")
+def modificar_doctor_strange(arbol, old_name, new_name):
+    arbol.proximity_search("Doctor") #nos va a listar los nombres que comienzan con Doctor.
+    value, other_value = arbol.delete(old_name) 
+    
+    if value is not None:
+        arbol.insert(new_name, other_value)
+        
+    print("Verificamos como quedo (despues de acomodar a Doctor Strange): ")
+    arbol.proximity_search("Doctor")
 
 
-def listar_superheroes_desc(node):
-    heroes = []
-    if node is not None:
-        heroes.extend(listar_superheroes_desc(node.right))
-        if not node.other_values["is_villain"]:
-            heroes.append(node.value)
-        heroes.extend(listar_superheroes_desc(node.left))
-    return heroes
+def listar_superheroes_desc(arbol):
+   heroes = []
+   def postOrder(nodo):
+        if nodo is not None:
+            postOrder(nodo.right)
+            if nodo.other_values["is_villain"] is False:
+                heroes.append(nodo.value)
+            postOrder(nodo.left)
+
+   
+   if arbol.root is not None:
+       postOrder(arbol.root)
+ 
+   return heroes
 
 
 def divide_tree(self, arbol_h, arbol_v):
-        def __divide_tree(root, arbol_h, arbol_v):
-            if root is not None:
-                if root.other_values["is_villain"] is False:
-                    arbol_h.insert(root.value, root.other_values)
-                else:
-                    arbol_v.insert(root.value, root.other_values)
-                __divide_tree(root.left, arbol_h, arbol_v)
-                __divide_tree(root.right, arbol_h, arbol_v)
+    def __divide_tree(root, arbol_h, arbol_v):
+        if root is not None:
+            if root.other_values["is_villain"] is False:
+                arbol_h.insert(root.value, root.other_values)
+            else:
+                arbol_v.insert(root.value, root.other_values)
+            __divide_tree(root.left, arbol_h, arbol_v)
+            __divide_tree(root.right, arbol_h, arbol_v)
+
+    __divide_tree(self.root, arbol_h, arbol_v)
+
 
 
 arbol_heroes = BinaryTree()
@@ -96,27 +114,23 @@ def contar_nodos(arbol):
         return 1 + __contar(root.left) + __contar(root.right)
     return __contar(arbol.root)
 
-
 nodos_heroes = contar_nodos(arbol_heroes)
 nodos_villanos = contar_nodos(arbol_villanos)
 
 
 
-print(listar_villanos(MCU_Tree.root))
-print(listar_superheroes_con_c(MCU_Tree.root))
-print(contar_superheroes(MCU_Tree.root))
-Cambiar_Doctor_Strange(MCU_Tree, "Doctor Strangeeeer", "Doctor Strange") #revisar
-MCU_Tree.in_order() #revisar
-print(listar_superheroes_desc(MCU_Tree.root))
+print(listar_villanos(MCU_Tree))
+print(listar_superheroes_C(MCU_Tree))
+print(contar_Superheroe(MCU_Tree))
+modificar_doctor_strange(MCU_Tree, "Doctor Strangeeeer", "Doctor Strange")
+
+print(listar_superheroes_desc(MCU_Tree))
+
+print(f"Cantidad de héroes: {nodos_heroes}")
+print(f"Cantidad de villanos: {nodos_villanos}")
 
 print("Héroes (ordenados):")
 arbol_heroes.in_order()
 
 print("Villanos (ordenados):")
 arbol_villanos.in_order()
-
-print(f"Cantidad de héroes: {nodos_heroes}")
-print(f"Cantidad de villanos: {nodos_villanos}")
-
-
-

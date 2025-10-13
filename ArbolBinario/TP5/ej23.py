@@ -111,6 +111,32 @@ def top3_derrotadores(arbol):
 
     return derrotadores_count.most_common(3)
 
+# def ranking(arbol, ranking_result): (Otra forma de realizarlo (la dada en clase))
+#     def __ranking(node, ranking_result):
+#         if node is not None:
+#             __ranking(node.left, ranking_result)
+#             criatura = node.other_values
+#             if criatura.derrotado_por is not None:
+#                 heroe = criatura.derrotado_por
+#                 if heroe not in ranking_result:
+#                     ranking_result[heroe] = 1
+#                 else:
+#                     ranking_result[heroe] += 1
+#             __ranking(node.right, ranking_result)
+
+#     if arbol.root is not None:
+#         __ranking(arbol.root, ranking_result)
+
+        
+def ordenar_ranking(item):
+    return item[1]
+
+
+        
+def ordenar_ranking(item):
+    return item[1]
+
+
 
 def listar_criaturas_Heracles(arbol):
     criaturas = []
@@ -221,3 +247,10 @@ aves_heracles(arbol_criaturas)
 dragon_ladon(arbol_criaturas)
 arbol_criaturas.by_level()
 captura_heracles(arbol_criaturas)
+
+# Otra forma de hacer el ranking con la funcion dada en clase:
+# ranking_result = {}
+# ranking(arbol_criaturas, ranking_result)
+# list_ranking = list(ranking_result.items())
+# list_ranking.sort(key=ordenar_ranking, reverse=True)
+# print(list_ranking[:3])

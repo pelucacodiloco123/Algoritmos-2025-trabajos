@@ -111,7 +111,8 @@ def top3_derrotadores(arbol):
 
     return derrotadores_count.most_common(3)
 
-# def ranking(arbol, ranking_result): (Otra forma de realizarlo (la dada en clase))
+#(Otra forma de realizar el ranking de derrotadores (la dada en clase))
+# def ranking(arbol, ranking_result):
 #     def __ranking(node, ranking_result):
 #         if node is not None:
 #             __ranking(node.left, ranking_result)

@@ -91,30 +91,26 @@ def arbolExpansion(grafo, vertice):
 
 
 def Habitacion1_sala(grafo):
-
-    habits = ["habitacion1"]
-    resultados = {}   
+    path = grafo.dijkstra('habitacion1') 
+    destination = 'SaladeEstar'
+    peso_total = None
+    camino_completo = []
+    resultados = {}
     
-    for habit in habits:
-        path = grafo.dijkstra(habit) #todos los caminos mas cortos a pc
-        destination = 'SaladeEstar'
-        peso_total = None
-        camino_completo = []
-        
-        while path.size() > 0: #mientras que el path tenga algo, hace un pop al value
-            value = path.pop()
-            if value[0] == destination:
-                if peso_total is None:
-                    peso_total = value[1]
-                camino_completo.append(value[0])
-                destination = value[2]
-        
-        camino_completo.reverse()
-
-        resultados[habit] = {
-            "camino": camino_completo,
-            "distancia": f"{peso_total} metros para conectar el router al Smart TV" if peso_total is not None and peso_total != math.inf else math.inf
-        }
+    while path.size() > 0:
+        value = path.pop()
+        if value[0] == destination:
+            if peso_total is None:
+                peso_total = value[1]
+            camino_completo.append(value[0])
+            destination = value[2]
+    
+    camino_completo.reverse()
+    
+    resultados['habitacion1'] = {
+        "camino": camino_completo,
+        "distancia": peso_total if peso_total is not None and peso_total != math.inf else math.inf
+    }
     
     return resultados
 

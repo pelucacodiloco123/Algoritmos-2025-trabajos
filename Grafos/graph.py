@@ -18,7 +18,7 @@ class Graph(List):
             self.visited = False
         
         def __str__(self):
-            return self.value
+            return str(self.value)
     
     class __nodeEdge:
 
@@ -50,8 +50,8 @@ class Graph(List):
     def insert_vertex(
         self,
         value: Any,
-    ) -> None:
-        node_vertex = Graph.__nodeVertex(value)
+      other_values: Optional[Any] = None) -> None:  #Añadido el other_values
+        node_vertex = Graph.__nodeVertex(value, other_values)
         self.append(node_vertex)
 
     def insert_edge(self, origin_vertex: Any, destination_vertex: Any, weight: int) -> None:
@@ -60,7 +60,7 @@ class Graph(List):
         if origin is not None and destination is not None:
             node_edge = Graph.__nodeEdge(destination_vertex, weight)
             self[origin].edges.append(node_edge)
-            if self.is_directed and origin != destination:
+            if not self.is_directed and origin != destination:
                 node_edge = Graph.__nodeEdge(origin_vertex, weight)
                 self[destination].edges.append(node_edge)
         else:
@@ -87,7 +87,7 @@ class Graph(List):
         key_value_vertex: str = None,
         key_value_edges: str = 'value',
     ) -> Optional[Any]:
-        delete_value = g.delete_value(value, key_value_vertex)
+        delete_value = self.delete_value(value, key_value_vertex)
         if delete_value is not None:
             for vertex in self:
                 self.delete_edge(vertex.value, value, key_value_edges)
@@ -214,28 +214,28 @@ class Graph(List):
         return forest[from_vertex] if from_vertex is not None else forest
 
 
-g = Graph(is_directed=True)
+# g = Graph(is_directed=True)
 
-g.insert_vertex('T')
-g.insert_vertex('F')
-g.insert_vertex('R')
-g.insert_vertex('X')
-g.insert_vertex('Z')
-# g.insert_vertex('A')
-# g.insert_vertex('B')
+# g.insert_vertex('T')
+# g.insert_vertex('F')
+# g.insert_vertex('R')
+# g.insert_vertex('X')
+# g.insert_vertex('Z')
+# # g.insert_vertex('A')
+# # g.insert_vertex('B')
 
-g.insert_edge('T', 'X', 6)
-g.insert_edge('T', 'F', 3)
-g.insert_edge('T', 'R', 8)
-g.insert_edge('F', 'X', 2)
-g.insert_edge('F', 'R', 2)
-g.insert_edge('R', 'X', 5)
-g.insert_edge('Z', 'R', 4)
-g.insert_edge('Z', 'X', 9)
+# g.insert_edge('T', 'X', 6)
+# g.insert_edge('T', 'F', 3)
+# g.insert_edge('T', 'R', 8)
+# g.insert_edge('F', 'X', 2)
+# g.insert_edge('F', 'R', 2)
+# g.insert_edge('R', 'X', 5)
+# g.insert_edge('Z', 'R', 4)
+# g.insert_edge('Z', 'X', 9)
 # g.insert_edge('A', 'B', 15)
 
 # g.show()
-print(g.exist_path('T', 'Z'))
+# print(g.exist_path('T', 'Z'))
 # expansion_tree = g.kruskal('F')
 # print(expansion_tree)
 # peso_total = 0

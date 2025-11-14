@@ -133,11 +133,6 @@ def ordenar_ranking(item):
     return item[1]
 
 
-        
-def ordenar_ranking(item):
-    return item[1]
-
-
 
 def listar_criaturas_Heracles(arbol):
     criaturas = []

@@ -92,7 +92,7 @@ def arbolExpansion(red, vertice):
     for edge in tree.split(';'):
         origin, destination, weight = edge.split('-')
         peso_total += int(weight)
-        print(peso_total)
+    return peso_total
 
 
 def obtener_caminos_Guarani(grafo):

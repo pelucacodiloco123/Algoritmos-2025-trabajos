@@ -87,7 +87,7 @@ def arbolExpansion(grafo, vertice):
     for edge in tree.split(';'):
         origin, destination, weight = edge.split('-')
         peso_total += int(weight)
-        print(f'Metros de cable que se necesitan: {peso_total}')
+    return f'Metros totales de cable: {peso_total}'
 
 
 def Habitacion1_sala(grafo):

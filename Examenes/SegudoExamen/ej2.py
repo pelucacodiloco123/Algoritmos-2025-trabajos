@@ -49,16 +49,14 @@ grafo_star_wars.insert_edge("Chewbacca", "BB8", 2)
 
 def arbolExpansion(arbol, vertice):
     tree = arbol.kruskal(vertice)
-
+    print(tree)
     peso_total = 0
-    arbolito = [] 
 
     for edge in tree.split(';'):
         origin, destination, weight = edge.split('-')
         peso_total += int(weight)
-        arbolito.append(f"{origin}, {destination}, (peso: {weight})")
 
-    return peso_total, arbolito
+    return peso_total
 
 def max_episodios_compartidos(grafo):
     max_peso = 0

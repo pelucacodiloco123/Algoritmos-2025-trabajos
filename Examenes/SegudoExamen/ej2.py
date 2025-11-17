@@ -31,7 +31,7 @@ grafo_star_wars.insert_edge("Luke Skywalker", "Han Solo", 7)
 grafo_star_wars.insert_edge("Luke Skywalker", "Darth Vader", 5)
 grafo_star_wars.insert_edge("Luke Skywalker", "Chewbacca", 5)
 
-grafo_star_wars.insert_edge("Han Solo", "Chewbacca", 10)
+grafo_star_wars.insert_edge("Han Solo", "Chewbacca", 9)
 grafo_star_wars.insert_edge("Han Solo", "Leia", 8)
 
 grafo_star_wars.insert_edge("Darth Vader", "Boba Fett", 3)

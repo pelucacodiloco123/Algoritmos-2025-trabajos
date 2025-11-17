@@ -173,6 +173,7 @@ class Graph(List):
                             no_visited.change_priority(pos, costo_nodo_actual + edge.weight)
         return path
 
+# kruskal(grafo, vértice inicio): Devuelve el árbol de expansión mínimo del grafo a partir del vértice de inicio.
     def kruskal(self, origin_vertex):
         def search_in_forest(forest, value):
             for index, tree in enumerate(forest):

@@ -85,14 +85,18 @@ def obtener_caminos_impresora(grafo):
     return resultados
 
 
-def arbolExpansion(red, vertice):
-    tree = red.kruskal(vertice)
+def arbolExpansion(arbol, vertice):
+    tree = arbol.kruskal(vertice)
 
     peso_total = 0
+    arbolito = [] 
+
     for edge in tree.split(';'):
         origin, destination, weight = edge.split('-')
         peso_total += int(weight)
-    return peso_total
+        arbolito.append(f"{origin}, {destination}, (peso: {weight})")
+
+    return peso_total, arbolito
 
 
 def obtener_caminos_Guarani(grafo):

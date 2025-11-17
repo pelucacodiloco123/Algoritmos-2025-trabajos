@@ -75,7 +75,7 @@ class Graph(List):
         pos_origin = self.search(origin, key_value)
         if pos_origin is not None:
             edge = self[pos_origin].edges.delete_value(destination, key_value)
-            if self.is_directed and edge is not None:
+            if not self.is_directed and edge is not None:
                 pos_destination = self.search(destination, key_value)
                 if pos_destination is not None:
                     self[pos_destination].edges.delete_value(origin, key_value)
@@ -173,6 +173,7 @@ class Graph(List):
                             no_visited.change_priority(pos, costo_nodo_actual + edge.weight)
         return path
 
+# kruskal(grafo, vértice inicio): Devuelve el árbol de expansión mínimo del grafo a partir del vértice de inicio.
     def kruskal(self, origin_vertex):
         def search_in_forest(forest, value):
             for index, tree in enumerate(forest):
@@ -212,6 +213,8 @@ class Graph(List):
         from_vertex = search_in_forest(forest, origin_vertex)
         
         return forest[from_vertex] if from_vertex is not None else forest
+
+
 
 
 # g = Graph(is_directed=True)

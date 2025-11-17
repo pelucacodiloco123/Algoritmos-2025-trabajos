@@ -80,14 +80,18 @@ conexiones = [
 for origen, destino, distancia in conexiones:
     Casa.insert_edge(origen, destino, distancia)
 
-def arbolExpansion(grafo, vertice):
-    tree = grafo.kruskal(vertice)
-    
+def arbolExpansion(arbol, vertice):
+    tree = arbol.kruskal(vertice)
+
     peso_total = 0
+    arbolito = [] 
+
     for edge in tree.split(';'):
         origin, destination, weight = edge.split('-')
         peso_total += int(weight)
-    return f'Metros totales de cable: {peso_total}'
+        arbolito.append(f"{origin}, {destination}, (peso: {weight})")
+
+    return peso_total, arbolito
 
 
 def Habitacion1_sala(grafo):

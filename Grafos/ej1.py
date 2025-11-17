@@ -43,7 +43,7 @@ def eliminar_aislados(grafo):
     
     return eliminados
 
-def vertices_con_mas_aristas(grafo):
+def vertices_con_mas_aristasDirigido(grafo):
 
     if not grafo:
         return False
@@ -62,7 +62,7 @@ def vertices_con_mas_aristas(grafo):
     
     return vertices_max, max_aristas
 
-def vertices_con_mas_aristas_entrantes(grafo):
+def vertices_con_mas_aristas_entrantesDirigido(grafo):
     if not grafo:
         return False
     
@@ -142,8 +142,8 @@ def arista_mas_larga(grafo):
     return aristas_maximas
 
 print(eliminar_aislados(Grafo))
-print(vertices_con_mas_aristas(Grafo))
-print(vertices_con_mas_aristas_entrantes(Grafo))
+print(vertices_con_mas_aristasDirigido(Grafo))
+print(vertices_con_mas_aristas_entrantesDirigido(Grafo))
 print(vertices_sin_salida(Grafo))
 print(contar_vertices(Grafo))
 print(vertices_con_ciclos_directos(Grafo))

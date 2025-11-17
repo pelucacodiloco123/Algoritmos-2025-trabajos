@@ -129,35 +129,41 @@ def contadortipos(arbol):
         inOrder(arbol.root)
     return tipos_count
 
-def mostrarmegaevolucion(arbol):
+def mostrarycontarmegaevolucion(arbol):
     pokemones = []
+    cont = 0
 
     def inOrder(nodo):
+        nonlocal cont
         if nodo is not None:
             inOrder(nodo.left)
             if nodo.other_values.megaevolucion is True:
                 pokemones.append(nodo.other_values.nombre)
+                cont += 1
             inOrder(nodo.right)
 
     if arbol.root is not None:
         inOrder(arbol.root)
 
-    return pokemones
+    return pokemones, cont
 
-def mostrargigamax(arbol):
+
+def mostrarycontargigamax(arbol):
     pokemones = []
-
+    cont = 0
     def inOrder(nodo):
+        nonlocal cont
         if nodo is not None:
             inOrder(nodo.left)
             if nodo.other_values.gigamax is True:
                 pokemones.append(nodo.other_values.nombre)
+                cont = cont + 1
             inOrder(nodo.right)
 
     if arbol.root is not None:
         inOrder(arbol.root)
 
-    return pokemones
+    return pokemones, cont
 
 
 
@@ -177,5 +183,5 @@ print(buscar_por_tipo(arbol_por_tipo, "Fantasma"))
 (listar_pokemones_by_level(arbol_por_nombre))
 print(mostrardebilesJolteonLycanrocTyrantrum(arbol_por_nombre))
 print(contadortipos(arbol_por_tipo))
-print(mostrarmegaevolucion(arbol_por_nombre))
-print(mostrargigamax(arbol_por_nombre))
+print(mostrarycontarmegaevolucion(arbol_por_nombre))
+print(mostrarycontargigamax(arbol_por_nombre))

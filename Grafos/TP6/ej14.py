@@ -86,7 +86,7 @@ def arbolExpansion(arbol, vertice):
 
     for edge in tree.split(';'):
         origin, destination, weight = edge.split('-')
-        print(f"Arista: {origin} - {destination}, Peso: {weight}")
+        print(f"Arista: {origin}, {destination}, Peso: {weight}")
         peso_total += int(weight)
 
     return peso_total

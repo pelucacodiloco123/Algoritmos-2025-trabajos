@@ -87,12 +87,12 @@ def obtener_caminos_impresora(grafo):
 
 def arbolExpansion(arbol, vertice):
     tree = arbol.kruskal(vertice)
-    print(tree)
     peso_total = 0
     arbolito = [] 
 
     for edge in tree.split(';'):
         origin, destination, weight = edge.split('-')
+        print(f"Arista: {origin} - {destination}, Peso: {weight}")
         peso_total += int(weight)
 
     return peso_total

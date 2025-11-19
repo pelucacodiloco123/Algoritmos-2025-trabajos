@@ -88,7 +88,6 @@ def obtener_caminos_impresora(grafo):
 def arbolExpansion(arbol, vertice):
     tree = arbol.kruskal(vertice)
     peso_total = 0
-    arbolito = [] 
 
     for edge in tree.split(';'):
         origin, destination, weight = edge.split('-')
@@ -100,74 +99,58 @@ def arbolExpansion(arbol, vertice):
 
 def obtener_caminos_Guarani(grafo):
     pcs = ["Manjaro", "Parrot", "Fedora", "Ubuntu", "Mint"]    
-    pc_mas_cercana = None
-    mejor_resultado = {}
-    distancia_minima = math.inf
+    resultados = {}   
     
     for pc in pcs:
-        path = grafo.dijkstra(pc)
+        path = grafo.dijkstra(pc)  # Todos los caminos más cortos desde pc
         destination = 'Guarani'
         peso_total = None
         camino_completo = []
         
-        while path.size() > 0:
+        while path.size() > 0:  # Mientras que el path tenga algo, hace un pop al value
             value = path.pop()
-            if value[0] == destination: 
+            if value[0] == destination:  # Chequea hasta que sea Guarani
                 if peso_total is None:
-                    peso_total = value[1] 
-                camino_completo.append(value[0])
-                destination = value[2] 
+                    peso_total = value[1]  # Añade el peso
+                camino_completo.append(value[0])  # Añade Guarani al camino
+                destination = value[2]  # Añade el predecesor de Guarani y vuelve a hacer esto
         
-        camino_completo.reverse()
+        camino_completo.reverse()  # Lo invierte para que sea de pc a Guarani
 
-        # Solo guardar si es la más cercana
-        if peso_total is not None and peso_total < distancia_minima:
-            distancia_minima = peso_total
-            pc_mas_cercana = pc
-            mejor_resultado = {
-                pc: {
-                    "camino": camino_completo,
-                    "distancia": peso_total
-                }
-            }
+        resultados[pc] = {  # Aca construye el camino
+            "camino": camino_completo,
+            "distancia": peso_total if peso_total is not None and peso_total != math.inf else math.inf
+        }
     
-    return mejor_resultado if pc_mas_cercana else False
+    return resultados
 
 
 def obtener_caminos_MongoDB(grafo):
     pcs = ["Ubuntu", "Mint"]    
-    pc_mas_cercana = None
-    mejor_resultado = {}
-    distancia_minima = math.inf
+    resultados = {}   
     
     for pc in pcs:
-        path = grafo.dijkstra(pc)
+        path = grafo.dijkstra(pc)  # Todos los caminos más cortos desde pc
         destination = 'MongoDB'
         peso_total = None
         camino_completo = []
         
-        while path.size() > 0:
+        while path.size() > 0:  # Mientras que el path tenga algo, hace un pop al value
             value = path.pop()
-            if value[0] == destination: 
+            if value[0] == destination:  # Chequea hasta que sea MongoDB
                 if peso_total is None:
-                    peso_total = value[1] 
-                camino_completo.append(value[0])
-                destination = value[2] 
+                    peso_total = value[1]  # Añade el peso
+                camino_completo.append(value[0])  # Añade MongoDB al camino
+                destination = value[2]  # Añade el predecesor de MongoDB y vuelve a hacer esto
         
-        camino_completo.reverse()
+        camino_completo.reverse()  # Lo invierte para que sea de pc a MongoDB
 
-        # Solo guardar si es la más cercana
-        if peso_total is not None and peso_total < distancia_minima:
-            distancia_minima = peso_total
-            pc_mas_cercana = pc
-            mejor_resultado = {
-                pc: {
-                    "camino": camino_completo,
-                    "distancia": peso_total
-                }
-            }
+        resultados[pc] = {  # Aca construye el camino
+            "camino": camino_completo,
+            "distancia": peso_total if peso_total is not None and peso_total != math.inf else math.inf
+        }
     
-    return mejor_resultado if pc_mas_cercana else False
+    return resultados
 
 
 def cambiar_ImpresoraYResolverB(red):
